@@ -30,5 +30,24 @@ public class SpecialAccount extends NormalAccount{
 	public void getAccount(double rate) {
 		this.rate=rate;
 	}
+	
+	@Override
+	public double rateManager() {
+		int count = 0;
+		double add = 0;
+		double rateN = rate * 0.01;
+		int add2 = 500;
+		for(int i=0; i<getAccount().length(); i++) {
+			if (count%2 ==0) {
+				add= money + (money * rateN)+ add2;
+				count++;
+			}
+			else {
+				add = money + (money * rateN);
+				count++;
+			}
+		}
+		return add;
+	}
 
 }

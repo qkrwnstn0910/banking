@@ -137,9 +137,7 @@ public class AccountManager {
 		   
 		}
 	}
-//	public void SpecialAdd() {
-//		if 
-//	}
+
 		
 	
 	

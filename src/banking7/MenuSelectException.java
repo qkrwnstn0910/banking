@@ -1,17 +1,22 @@
 package banking7;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuSelectException {
+	Scanner scan = new Scanner(System.in);
 	
-	
-	public static void exception1(int alp) {
+	public static void exception1(String alp) {
 		try {
-			if(alp < 1 || alp >7) {
+			int number = Integer.parseInt(alp);
+			if(number < 1 || number >7) {
 				System.out.println("1부터 7까지의 값을 입력하세요");
 			}
+			
 		}
-		catch (Exception e) {
+		catch (InputMismatchException e) {
+			System.out.println("오류발생1");
+			
 		}
 	}
 	public static void exception2(int alp2) {
@@ -25,7 +30,7 @@ public class MenuSelectException {
 	}
 	
 	public static void exception3(int alp3) {
-		if(alp3%500==0 && alp3>=500) {
+		if(alp3%500==0 && alp3<=500) {
 			System.out.println("500원 단위로만 입금가능");
 			throw new IllegalArgumentException("500원 단위 아님");
 		}

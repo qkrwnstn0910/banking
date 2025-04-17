@@ -8,7 +8,7 @@ public class BankingSystemMain {
 	public static void main(String[] args) {
 		AccountManager accounts1 = new AccountManager();
 		Scanner scan = new Scanner(System.in);
-		int count =0;
+		String count;
 		accounts1.loadFile();
 		autoSave saveThread = new autoSave();
         saveThread.setDaemon(true);
@@ -16,39 +16,48 @@ public class BankingSystemMain {
         saveThread.start();
 		while(true) {
 		main();
-		count = scan.nextInt();
-		scan.nextLine();
+		count = scan.nextLine();
+	
 		MenuSelectException.exception1(count);
 		
-			if(count == 1) {
+		int count1 = Integer.parseInt(count);
+			if(count1 == 1) {
 			//계좌계설
 			main2();
 			int choose = scan.nextInt()	;
 			if (choose == 1) {
 				//보통계좌
-				accounts1.makeNormalAccount();
+				main3();
+				int choose2 = scan.nextInt();
+				if(choose2 == 1 )	{
+					accounts1.makeNormalAccount();
+				}
+				else if(choose2 ==2) {
+					accounts1.makeSpecialAccount();
+				}
+				
 			}
 			if (choose == 2) {
 				//신용계좌
 				accounts1.makeCreditAccount();
 			}
 		}
-		if(count == 2) {
+		if(count1 == 2) {
 			//입금
 			accounts1.depositMoney();
 		}
-		if(count == 3) {
+		if(count1 == 3) {
 			//출금
 			accounts1.wihtDrawMoney();
 		}
-		if(count == 4) {
+		if(count1 == 4) {
 			accounts1.showAccInfo();
 			//전체계좌정보출력
 		}
-		if(count == 5) {
+		if(count1 == 5) {
 			accounts1.deleteAccount();
 		}
-		if(count == 6) {
+		if(count1 == 6) {
 			//프로그램 종료
 			accounts1.saveFile();
 			System.exit(0);
