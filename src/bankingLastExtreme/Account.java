@@ -1,16 +1,13 @@
-package banking7;
+package bankingLastExtreme;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-import banking.AccountManager;
+public class Account implements Serializable{
 
-public abstract class Account implements Serializable{
-
-	static final long serialVersionUID = 12312L;
 	protected String account;
 	protected String name;
-	protected double money =1;
+	protected double money;
 	protected double rate;
 	private String accountNumber;  
     private String inputAccount;
@@ -54,14 +51,14 @@ public abstract class Account implements Serializable{
 	
 	public double rateManager () {
 		double rateN = rate * 0.01;
-	    return (money* rateN);
+	    return money + (money * rateN);
 	}
 	
 	@Override
 	public int hashCode() {
 		return Objects.hash(accountNumber,inputAccount);
 	}
-	@Override
+	 @Override
 	    public boolean equals(Object obj) {
 	        if (this == obj) return true;
 	        if (obj == null || getClass() != obj.getClass()) return false;
@@ -69,6 +66,8 @@ public abstract class Account implements Serializable{
 	        return Objects.equals(accountNumber, account.accountNumber) &&
 	               Objects.equals(inputAccount, account.inputAccount);
 	    }
+
+
 }
 
 

@@ -1,10 +1,10 @@
-package banking7;
+package bankingLastExtreme;
 
 public class HighCreditAccount extends Account{
 	private String credit;
 
-	public HighCreditAccount(String account, String name, double gMoney, double rate, String credit) {
-		super(account, name, gMoney, rate);
+	public HighCreditAccount(String account, String name, double money, double rate, String credit) {
+		super(account, name, money, rate);
 		this.credit = credit;
 	}
 	public String setAccount() {
@@ -53,7 +53,7 @@ public class HighCreditAccount extends Account{
 		else {
 			System.out.println("보통계좌는 기존의 이자율이 적용됩니다.");
 		}
-		return(money * newRate);
+		return money + (money * newRate);
 	}
 	
 	

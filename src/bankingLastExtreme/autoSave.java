@@ -1,4 +1,4 @@
-package banking7;
+package bankingLastExtreme;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -6,18 +6,14 @@ import java.util.HashSet;
 
 public class autoSave extends Thread{
 	
-	private final HashSet<Account> set ;
-	
-    public autoSave(HashSet<Account> set) {
-        this.set = set;
-    }
+	HashSet<Account> set = new HashSet<>();
 	
 	@Override
 	public void run	() {
 		while (true) {
 		try {
 			Thread.sleep(5000);
-            System.out.println("자동저장중");
+            System.out.println("");
 
             PrintWriter out = new PrintWriter(new FileWriter("src/text/AutoSaveAccount.txt"));
             for (Account acc : set) {
@@ -30,7 +26,6 @@ public class autoSave extends Thread{
             	HighCreditAccount hcc = (HighCreditAccount) acc;
             	out.println("등급: "+hcc.getCredit());
             	}
-            System.out.println("자동저장 : 계좌"+acc.getAccount());
             }
             out.close();
 		}
@@ -41,6 +36,9 @@ public class autoSave extends Thread{
 		catch (Exception e) {
 			System.out.println("저장이 실행되지 않았습니다.");
 			}
+				
+			
+		
 		}
 	}
 }

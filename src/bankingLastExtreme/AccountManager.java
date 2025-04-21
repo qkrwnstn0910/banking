@@ -1,4 +1,4 @@
-package banking5;
+package bankingLastExtreme;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class AccountManager {
 	Scanner scan = new Scanner(System.in);
 	HashSet<Account> set = new HashSet<>();
-	
+	autoSave auto = new autoSave();
 	int count =0;
 
 	public void makeNormalAccount() {
@@ -45,6 +45,24 @@ public class AccountManager {
 		set.add(new NormalAccount(gAccount, gname, gMoney, gRate));
 		count++;
  	}
+	public void makeSpecialAccount() {
+		System.out.println("특판계좌개설");
+		System.out.println("계좌번호:");
+		String gAccount = scan.nextLine();
+		System.out.println("이름:");
+		String gname = scan.nextLine();
+		System.out.println("잔액:");
+		double gMoney = scan.nextDouble();
+		System.out.println("이자율(정수형태)");
+		double gRate = scan.nextDouble();
+		scan.nextLine();
+		
+		System.out.println("계좌가 생성되었습니다.");
+		
+		set.add(new SpecialAccount(gAccount, gname, gMoney, gRate));
+		
+		count++;
+ 	}
 	public void makeCreditAccount() {
 		System.out.println("특별계좌개설");
 		System.out.println("계좌번호:");
@@ -68,9 +86,10 @@ public class AccountManager {
 	public void saveFile() {
 		try {ObjectOutputStream out = 
 				new ObjectOutputStream(new FileOutputStream("src/text/AccountInfo.obj"));
-			for(Account acc : set) {
-				out.writeObject(acc);
-			}
+
+		for(Account acc : set) {
+			out.writeObject(acc);
+		}
 		} catch (Exception e) {
 			System.out.println("저장실패");
 			e.printStackTrace();
@@ -96,14 +115,18 @@ public class AccountManager {
 		String gAccount = scan.nextLine();
 		for (Account acc : set) {
 		    if (acc.getAccount().equals(gAccount)) {
-		        // 찾음!
 		
 				System.out.println("입금할 금액을 입력하세요");
 				int gmoney = scan.nextInt();
-				MenuSelectException.exception2(gmoney);
+				if(MenuSelectException.exception2(gmoney)) {
+					break;
+				}
+				
+				
 				MenuSelectException.exception3(gmoney);
 				scan.nextLine();
 				try {
+					
 					double alpha = acc.getMoney(); 
 					double beta = acc.rateManager();
 					acc.setMoney(alpha+beta);
@@ -118,6 +141,7 @@ public class AccountManager {
 		   
 		}
 	}
+
 		
 	
 	
@@ -188,6 +212,22 @@ public class AccountManager {
 			}
 		}
 		
+	}
+	public void autoSave2() {
+		System.out.println("1. 자동저장on, 2. 자동저장off");
+		int choose = scan.nextInt();
+		try {
+			if (choose == 1 ) {
+				System.out.println("자동저장을 시작합니다.");
+				auto.run();
+			}
+			else if(choose == 2) {
+				System.out.println("자동저장을 종료합니다.");
+				
+			}
+		}catch (Exception e) {
+			
+		}
 	}
 }
 
